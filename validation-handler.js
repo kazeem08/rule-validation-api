@@ -97,6 +97,7 @@ function validationResponse(body){
   const message = !(error) ? `field ${rule.field} successfully validated.` : `field ${rule.field} failed validation.`
   return {
     "message": message,
+    "error": error,
     "status": (error) ? 'error' : 'success',
     "data": {
       "validation": {

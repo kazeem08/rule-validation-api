@@ -44,7 +44,9 @@ app.post('/validate-rule', async (req, res) => {
       data: result.data,
   }
 
-    return res.send(response)
+  const statusCode = result.error ? 400 : 200;
+
+  return res.status(statusCode).send(response)
 
   }catch(e){
     // format error message

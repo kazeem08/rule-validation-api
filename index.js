@@ -4,8 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const config = require('./config');
+const { handler, errorHandler } = require('./validation-handler')
 const { schema } = require('./schema');
-
 
 const app = express();
 
@@ -34,7 +34,9 @@ app.get('/', async (req, res) => {
 app.post('/validate-rule', async (req, res) => {
 
   try{
-    await schema.validateAsync(req.body)
+    await schema.validateAsync(req.body);
+
+    const result = handler(req.body);
 
     const response  = {
       message: result.message,

@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const config = require('./config');
+const { schema } = require('./schema');
 
 
 const app = express();
@@ -28,6 +29,32 @@ app.use((err, req, res, next) => {
 
 app.get('/', async (req, res) => {
   return res.send(config.details);
+});
+
+app.post('/validate-rule', async (req, res) => {
+
+  try{
+    await schema.validateAsync(req.body)
+
+    const response  = {
+      message: result.message,
+      status: result.status,
+      data: result.data,
+  }
+
+    return res.send(response)
+
+  }catch(e){
+    // format error message
+    const message = errorHandler(e);
+
+    const errorResponse = {
+        message,
+        status: "error",
+        data: null,
+    }
+    return res.status(400).send(errorResponse)
+  }
 });
 
 const port = process.env.PORT || 3800;

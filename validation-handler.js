@@ -26,7 +26,6 @@ function handler(body){
     }
   }
 
-
   const outer = splitRule[0] ? data[splitRule[0]] : undefined;
 
   const inner = outer ? outer[splitRule[1]] : undefined;

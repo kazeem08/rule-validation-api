@@ -1,6 +1,6 @@
 ### What is this repository for? ###
 
-* Quick summary
+* Quick summary :
 This application is meant to validate rule with provided parameters and conditions.
 
 ### How do I get set up? ###
